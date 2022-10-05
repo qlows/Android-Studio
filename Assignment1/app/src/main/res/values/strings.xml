@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Assignment1</string>
+    <string name="calculate">Calculate</string>
+    <string name="hourly_rate">Hourly Rate:</string>
+    <string name="tax">Tax:</string>
+    <string name="no_of_hours">Number of Hours:</string>
+    <string name="pay">Total Pay:</string>
+</resources>

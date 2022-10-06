@@ -5,4 +5,8 @@
     <string name="tax">Tax:</string>
     <string name="no_of_hours">Number of Hours:</string>
     <string name="pay">Total Pay:</string>
+    <string name="about_me">About Me</string>
+    <string name="info">Umit Kilinc \n 101232721</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

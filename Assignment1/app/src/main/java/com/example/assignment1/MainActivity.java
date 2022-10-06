@@ -54,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
                 total_pay = payment;
             } else {
                 payment = (noh - 40) * hr * 1.5 + 40 * hr;
+                total_pay = payment;
             }
 
             tax = total_pay * 0.18;
 
-            this.payment.setText(String.format("%.2f", payment));
             this.total_pay.setText(String.format("%.2f", total_pay));
             this.tax.setText(String.format("%.2f", tax));
     }
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
-
+    // 2. activity
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();

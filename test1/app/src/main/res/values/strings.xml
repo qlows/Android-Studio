@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">LabTest1</string>
+    <string name="student">Umit Kilinc \n 101232721</string>
+    <string name="menu_item">Colors</string>
+    <string name="red">Red</string>
+    <string name="green">Green</string>
+    <string name="blue">Blue</string>
+</resources>

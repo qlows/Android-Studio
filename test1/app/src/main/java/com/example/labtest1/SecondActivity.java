@@ -43,15 +43,10 @@ public class SecondActivity extends AppCompatActivity {
         });
     }
 
-    //Selected item
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+    //Set the background colour
+    void setColour(int color){
+        View view = this.getWindow().getDecorView();
+        view.setBackgroundColor(color);
     }
 
     //Change the background colour
@@ -64,10 +59,15 @@ public class SecondActivity extends AppCompatActivity {
             setColour(Color.GREEN);
         }
     }
-
-    //Set the background colour
-    void setColour(int color){
-        View view = this.getWindow().getDecorView();
-        view.setBackgroundColor(color);
+    
+    //Selected item
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

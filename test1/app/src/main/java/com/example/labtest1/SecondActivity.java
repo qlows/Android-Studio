@@ -59,7 +59,7 @@ public class SecondActivity extends AppCompatActivity {
             setColour(Color.GREEN);
         }
     }
-    
+
     //Selected item
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

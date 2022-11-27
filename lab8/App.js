@@ -20,6 +20,7 @@ import AssetExample from './components/AssetExample';
 import { Card } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const DATA = [
   {
@@ -53,9 +54,9 @@ function Item({ title, author, backgroundColor, textColor, onPress }) {
   );
 }
 
-function HomeScreen(navigation) {
-  const [refresh, setRefresh] = React.useState(0);
+function HomeScreen({ navigation }) {
   const [selectedId, setSelectedId] = React.useState(null);
+  const [refresh, setRefresh] = React.useState(0);
   const [isLoading, setLoading] = React.useState(true);
   const [list, setData] = React.useState(DATA);
 
@@ -74,8 +75,8 @@ function HomeScreen(navigation) {
   };
 
   React.useEffect(() => {
-    getUsers(), [];
-  });
+    getUsers();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -88,7 +89,6 @@ function HomeScreen(navigation) {
             const backgroundColor =
               item.id === selectedId ? '#800000' : '#D2B48C';
             const color = item.id === selectedId ? 'white' : 'black';
-
             return (
               <Item
                 title={item.username}
@@ -106,30 +106,27 @@ function HomeScreen(navigation) {
     </SafeAreaView>
   );
 }
-
-function DetailsScreen(navigation, route) {
+function DetailsScreen({ navigation, route }) {
   return (
     <>
-      <Text>{route,params.item.name}</Text>
-      <Text>{route,params.item.username}</Text>
-      <Text>{route,params.item.email}</Text>
-      <Text>{route,params.item.phone}</Text>
+      <Text>{route.params.item.name}</Text>
+      <Text>{route.params.item.username}</Text>
+      <Text>{route.params.item.email}</Text>
+      <Text>{route.params.item.phone}</Text>
     </>
   );
 }
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator(); //createBottomTabNavigator(); //createStackNavigator();
 
 export default function App() {
   return (
-    <>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Details" component={DetailsScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

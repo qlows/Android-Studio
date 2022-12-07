@@ -1,12 +1,9 @@
 import * as React from 'react';
 import {
   Text,
-  View,
+  Test,
   StyleSheet,
-  Button,
   SafeAreaView,
-  Image,
-  TextInput,
   FlatList,
   TouchableOpacity,
   ActivityIndicator,
@@ -45,6 +42,29 @@ const DATA = [
   },
 ];
 
+const ALBUM_DATA = [
+  {
+    userId: '1',
+    id: '1',
+    title: 'quidem molestiae enim',
+  },
+  {
+    userId: '1',
+    id: '2',
+    title: 'sunt qui excepturi placeat culpa',
+  },
+  {
+    userId: '1',
+    id: '3',
+    title: 'omnis laborum odio',
+  },
+  {
+    userId: '1',
+    id: '4',
+    title: 'non esse culpa molestiae omnis sed optio',
+  },
+];
+
 function Item({ title, author, backgroundColor, textColor, onPress }) {
   return (
     <TouchableOpacity style={[styles.item, backgroundColor]} onPress={onPress}>
@@ -59,6 +79,21 @@ function HomeScreen({ navigation }) {
   const [refresh, setRefresh] = React.useState(0);
   const [isLoading, setLoading] = React.useState(true);
   const [list, setData] = React.useState(DATA);
+  const [albumList, setAlbumData] = React.useState(ALBUM_DATA);
+
+  const getAlbums = async () => {
+    try {
+      const response = await fetch(
+        'https://jsonplaceholder.typicode.com/albums'
+      );
+      const json = await response.json();
+      setAlbumData(json);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const getUsers = async () => {
     try {
@@ -78,21 +113,29 @@ function HomeScreen({ navigation }) {
     getUsers();
   }, []);
 
+  React.useEffect(() => {
+    getAlbums();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
+      <>
+        <Text style={styles.student}>Umit Kilinc 101232721</Text>
+      </>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
         <FlatList
-          data={list}
+          data={albumList}
+          userData={list}
           renderItem={({ item }) => {
             const backgroundColor =
               item.id === selectedId ? '#800000' : '#D2B48C';
             const color = item.id === selectedId ? 'white' : 'black';
             return (
               <Item
-                title={item.username}
-                author={item.name}
+                title={item.title}
+                //author={item.name}
                 onPress={() => navigation.navigate('Details', { item })}
                 backgroundColor={{ backgroundColor }}
                 textColor={{ color }}
@@ -110,8 +153,8 @@ function DetailsScreen({ navigation, route }) {
   return (
     <>
       <Text>{route.params.item.name}</Text>
-      <Text>{route.params.item.username}</Text>
       <Text>{route.params.item.email}</Text>
+      <Text>{route.params.item.username}</Text>
       <Text>{route.params.item.phone}</Text>
     </>
   );
@@ -146,4 +189,12 @@ const styles = StyleSheet.create({
   },
   title: { fontSize: 20 },
   author: { fontSize: 20 },
+  student: {
+    flex: 1,
+    justifyContent: 'center',
+    textAlign: 'center',
+    margin: 5,
+    padding: 5,
+    fontSize: 15,
+  },
 });
